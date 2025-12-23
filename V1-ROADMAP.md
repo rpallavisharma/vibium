@@ -764,7 +764,7 @@ Verify before packaging: ✅ 2025-12-21
 
 ## Day 12-13: Packaging
 
-### Milestone 12.1: Cross-Compile Target
+### ✅ Milestone 12.1: Cross-Compile Target
 ```
 Add build-all-platforms target to Makefile:
 
@@ -792,24 +792,27 @@ file clicker/bin/clicker-linux-amd64  # Should show static binary
 ```
 
 ### Milestone 12.2: Platform NPM Packages
+
+> **Detailed Plan:** [docs/plans/V1-MILESTONE-12.2.md](docs/plans/V1-MILESTONE-12.2.md)
+
 ```
 Create packages/:
 
 packages/
-├── vibium-linux-x64/
+├── linux-x64/                 # npm: @vibium/linux-x64
 │   ├── package.json
 │   └── bin/clicker
-├── vibium-linux-arm64/
+├── linux-arm64/               # npm: @vibium/linux-arm64
 │   └── ...
-├── vibium-darwin-x64/
+├── darwin-x64/                # npm: @vibium/darwin-x64
 │   └── ...
-├── vibium-darwin-arm64/
+├── darwin-arm64/              # npm: @vibium/darwin-arm64
 │   └── ...
-└── vibium-win32-x64/
+└── win32-x64/                 # npm: @vibium/win32-x64
     └── ...
 
 Each package.json:
-- name: @vibium/clicker-{platform}-{arch}
+- name: @vibium/{platform}-{arch}
 - os and cpu fields for npm filtering
 ```
 

@@ -1,4 +1,4 @@
-.PHONY: all build build-go build-js build-all-platforms deps clean clean-bin clean-js clean-cache clean-all serve test test-cli test-js test-mcp double-tap help
+.PHONY: all build build-go build-js build-all-platforms package-platforms deps clean clean-bin clean-js clean-cache clean-all serve test test-cli test-js test-mcp double-tap help
 
 # Default target
 all: build
@@ -25,6 +25,17 @@ build-all-platforms:
 	cd clicker && CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -o bin/clicker-windows-amd64.exe ./cmd/clicker
 	@echo "Done. Built binaries:"
 	@ls -lh clicker/bin/clicker-*
+
+# Copy binaries to platform packages for npm publishing
+package-platforms: build-all-platforms
+	@echo "Copying binaries to platform packages..."
+	cp clicker/bin/clicker-linux-amd64 packages/linux-x64/bin/clicker
+	cp clicker/bin/clicker-linux-arm64 packages/linux-arm64/bin/clicker
+	cp clicker/bin/clicker-darwin-amd64 packages/darwin-x64/bin/clicker
+	cp clicker/bin/clicker-darwin-arm64 packages/darwin-arm64/bin/clicker
+	cp clicker/bin/clicker-windows-amd64.exe packages/win32-x64/bin/clicker.exe
+	@echo "Done. Package binaries:"
+	@ls -lh packages/*/bin/clicker*
 
 # Install npm dependencies (skip if node_modules exists)
 deps:
@@ -91,6 +102,7 @@ help:
 	@echo "  make build-go           - Build clicker binary"
 	@echo "  make build-js           - Build JS client"
 	@echo "  make build-all-platforms - Cross-compile clicker for all platforms"
+	@echo "  make package-platforms  - Copy binaries to npm platform packages"
 	@echo "  make deps               - Install npm dependencies"
 	@echo "  make serve              - Start proxy server on :9515"
 	@echo "  make test               - Run all tests (CLI + JS + MCP)"

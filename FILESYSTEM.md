@@ -130,20 +130,26 @@ vibium/
 │       └── 2025-12-20-day10-mcp.md
 │
 ├── packages/                             # Platform-specific npm packages (Day 12-13)
-│   ├── vibium/                           # Main package (re-exports)
+│   ├── vibium/                           # Main package: npm vibium
 │   │   ├── package.json
+│   │   ├── index.js                      # Re-exports clients/javascript
 │   │   ├── bin.js                        # npx entry → execs clicker mcp
 │   │   └── postinstall.js                # Runs clicker install for Chrome
-│   ├── vibium-linux-x64/
-│   │   └── package.json
-│   ├── vibium-linux-arm64/
-│   │   └── package.json
-│   ├── vibium-darwin-x64/
-│   │   └── package.json
-│   ├── vibium-darwin-arm64/
-│   │   └── package.json
-│   └── vibium-win32-x64/
-│       └── package.json
+│   ├── linux-x64/                        # npm: @vibium/linux-x64
+│   │   ├── package.json
+│   │   └── bin/clicker
+│   ├── linux-arm64/                      # npm: @vibium/linux-arm64
+│   │   ├── package.json
+│   │   └── bin/clicker
+│   ├── darwin-x64/                       # npm: @vibium/darwin-x64
+│   │   ├── package.json
+│   │   └── bin/clicker
+│   ├── darwin-arm64/                     # npm: @vibium/darwin-arm64
+│   │   ├── package.json
+│   │   └── bin/clicker
+│   └── win32-x64/                        # npm: @vibium/win32-x64
+│       ├── package.json
+│       └── bin/clicker.exe
 │
 ├── examples/                             # Example projects (Day 14)
 │   ├── async-basic/
